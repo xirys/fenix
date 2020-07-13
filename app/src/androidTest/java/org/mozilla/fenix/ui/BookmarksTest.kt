@@ -126,6 +126,24 @@ class BookmarksTest {
         homeScreen {
         }.openThreeDotMenu {
         }.openBookmarks {
+            bookmarksListIdlingResource =
+                RecyclerViewIdlingResource(activityTestRule.activity.findViewById(R.id.bookmark_list))
+            IdlingRegistry.getInstance().register(bookmarksListIdlingResource!!)
+
+            clickAddFolderButton()
+            verifyKeyboardVisible()
+            addNewFolderName(bookmarksFolderName)
+            saveNewFolder()
+            verifyFolderTitle(bookmarksFolderName)
+            verifyKeyboardHidden()
+        }
+    }
+
+    @Test
+    fun createBookmarkFolderTest2() {
+        homeScreen {
+        }.openThreeDotMenu {
+        }.openBookmarks {
             clickAddFolderButton()
             verifyKeyboardVisible()
             addNewFolderName(bookmarksFolderName)
